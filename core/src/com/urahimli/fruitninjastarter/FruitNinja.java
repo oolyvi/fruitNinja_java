@@ -36,7 +36,7 @@ public class FruitNinja extends ApplicationAdapter implements InputProcessor {
 	int score = 0;
 
 	float genCounter = 0f;
-	private final float startGenSpeed = 1.1f;    //baslatma sureti
+	private final float startGenSpeed = 1.1f;    
 	float genSpeed = startGenSpeed;
 
 	private double currentTime;
@@ -60,7 +60,7 @@ public class FruitNinja extends ApplicationAdapter implements InputProcessor {
 		params.color = Color.WHITE;
 		params.borderColor = Color.BLACK;
 		params.size = 60;
-		params.characters = "0123456789 ScreCutoplay:.+-";  //var ola bilecek yazilardaki herfleri yaziriq
+		params.characters = "0123456789 ScreCutoplay:.+-";  
 		font = fontGen.generateFont(params);
 
 	}
@@ -77,12 +77,9 @@ public class FruitNinja extends ApplicationAdapter implements InputProcessor {
 
 
 		if (lives <= 0 && gameOverTime == 0f) {
-			//game over
 			gameOverTime = currentTime;
 		}
 		if (lives > 0) {
-			//game mode   //canlari cekmek
-
 			genSpeed -= deltaTime * 0.015f;
 
 			if (genCounter <= 0f) {
@@ -152,11 +149,8 @@ public class FruitNinja extends ApplicationAdapter implements InputProcessor {
 
 	private void addItem() {
 		float pos = random.nextFloat() * Math.max(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
-		//ucan meyveleri yaratma, suret ve positiona gore
 		Fruit item = new Fruit(new Vector2(pos, -Fruit.radius), new Vector2((Gdx.graphics.getWidth() * 0.5f - pos) * (0.3f + (random.nextFloat() - 0.5f)), Gdx.graphics.getHeight() * 0.5f));
 
-		//0 ve 1 arasinda reqem verir, 0.98'den boyuk olmasi ehtimali cox azdir deye hemin hisseye
-		//pul vermek qoyuruq. O biriler de bu mentiqle davam edir
 		float type = random.nextFloat();
 		if (type > 0.98) {
 			item.type = Fruit.Type.LIFE;
@@ -171,14 +165,11 @@ public class FruitNinja extends ApplicationAdapter implements InputProcessor {
 	
 	@Override
 	public void dispose () {
-		batch.dispose();   //dispose'la yox edirdik burada
+		batch.dispose();   
 		font.dispose();
 		fontGen.dispose();
 	}
 
-
-
-	//Input Processor
 	@Override
 	public boolean keyDown(int keycode) {
 		return false;
@@ -208,14 +199,12 @@ public class FruitNinja extends ApplicationAdapter implements InputProcessor {
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 
 		if (lives <= 0 && currentTime - gameOverTime > 2f) {
-			//menu mode / cutToPlay yazir / oyunun baslangici
 			gameOverTime = 0f;
 			score = 0;
 			lives = 4;
 			genSpeed = startGenSpeed;
 			fruitArray.clear();
 		} else {
-			//game mode / oyun davam edirse
 			Array<Fruit> toRemove = new Array<>();
 			Vector2 pos = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
 			int plusScore = 0;
