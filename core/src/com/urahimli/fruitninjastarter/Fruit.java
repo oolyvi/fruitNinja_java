@@ -19,7 +19,6 @@ public class Fruit {
         type = Type.REGULAR;
     }
 
-    //meyveye tiklandigini yoxlayir
     public boolean clicked(Vector2 click) {
         if (pos.dst2(click) <= radius * radius + 1) return true;
         return false;
@@ -33,9 +32,9 @@ public class Fruit {
         return (pos.y < -2f * radius);
     }
 
-    public void update(float dt) {   //dt = delta time
-        velocity.y -= dt * (Gdx.graphics.getHeight() * 0.2f);  //meyveler qalxdiqdan sonra yere dusur, ucub getmir
-        velocity.x -= dt * Math.signum(velocity.x) * 5f;   //meyveler sola ve saga yayilir
+    public void update(float dt) {   
+        velocity.y -= dt * (Gdx.graphics.getHeight() * 0.2f); 
+        velocity.x -= dt * Math.signum(velocity.x) * 5f;   
 
         pos.mulAdd(velocity, dt);
     }
